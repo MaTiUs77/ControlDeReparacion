@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A94862CB-6D86-416A-881A-E1B6AB2B5DB9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControlDeReparacion</RootNamespace>
+    <AssemblyName>ControlDeReparacion</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\USH-NT-3\v1\Users\INSAUT\PLANTA_3\TECNICOS_3\Programacion\Software\Matias\Control_de_reparacion\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>80</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsUrl>\\ush-nt-3\v1\Users\INSAUT\PLANTA_3\TECNICOS_3\Programacion\Software\Matias\Control_de_reparacion\</BootstrapperComponentsUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>repair-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F038FB8AB0B897053D6755140CC969077FC583F9</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ControlDeReparacion_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>CapturaCam\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="M77, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\M77\M77\bin\Debug\M77.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Capture.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Filtros.cs" />
+    <Compile Include="Filtro\formFiltro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filtro\formFiltro.Designer.cs">
+      <DependentUpon>formFiltro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formAcerca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAcerca.Designer.cs">
+      <DependentUpon>formAcerca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formActual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formActual.Designer.cs">
+      <DependentUpon>formActual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formAdminData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAdminData.Designer.cs">
+      <DependentUpon>formAdminData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formCapture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formCapture.Designer.cs">
+      <DependentUpon>formCapture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formConfig.Designer.cs">
+      <DependentUpon>formConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formGaleria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formGaleria.Designer.cs">
+      <DependentUpon>formGaleria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formHistorico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHistorico.Designer.cs">
+      <DependentUpon>formHistorico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formMenuImagen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMenuImagen.Designer.cs">
+      <DependentUpon>formMenuImagen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formOnline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formOnline.Designer.cs">
+      <DependentUpon>formOnline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formReporte.Designer.cs">
+      <DependentUpon>formReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formSector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSector.designer.cs">
+      <DependentUpon>formSector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gridEdit.cs" />
+    <Compile Include="Login\formLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\formLogin.Designer.cs">
+      <DependentUpon>formLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.cs" />
+    <Compile Include="Operador.cs" />
+    <Compile Include="Service\Service.cs" />
+    <Compile Include="Service\ServiceCore.cs" />
+    <Compile Include="Sistema.cs" />
+    <Compile Include="Upload\formUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Upload\formUpload.Designer.cs">
+      <DependentUpon>formUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <Compile Include="win_Accion\formAccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Accion\formAccion.Designer.cs">
+      <DependentUpon>formAccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Accion\libAccion.cs" />
+    <Compile Include="win_Causa\libCausa.cs" />
+    <Compile Include="formCodigo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formCodigo.Designer.cs">
+      <DependentUpon>formCodigo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Causa\formCausa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Causa\formCausa.Designer.cs">
+      <DependentUpon>formCausa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Defecto\formDefecto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Defecto\formDefecto.Designer.cs">
+      <DependentUpon>formDefecto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Defecto\libDefecto.cs" />
+    <Compile Include="win_Modelo\formModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Modelo\formModelo.designer.cs">
+      <DependentUpon>formModelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Modelo\libModelo.cs" />
+    <Compile Include="win_Origen\formOrigen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Origen\formOrigen.designer.cs">
+      <DependentUpon>formOrigen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Origen\libOrigen.cs" />
+    <Compile Include="win_Panel\formPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Panel\formPanel.Designer.cs">
+      <DependentUpon>formPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Panel\libPanel.cs" />
+    <Compile Include="win_Placas\formIngresoPlaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Placas\formIngresoPlaca.Designer.cs">
+      <DependentUpon>formIngresoPlaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formStat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formStat.Designer.cs">
+      <DependentUpon>formStat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reparacion.cs" />
+    <Compile Include="win_Usuario\formUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win_Usuario\formUsuario.Designer.cs">
+      <DependentUpon>formUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win_Usuario\libUsuario.cs" />
+    <EmbeddedResource Include="Filtro\formFiltro.resx">
+      <DependentUpon>formFiltro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAcerca.resx">
+      <DependentUpon>formAcerca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formActual.resx">
+      <DependentUpon>formActual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAdminData.resx">
+      <DependentUpon>formAdminData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formCapture.resx">
+      <DependentUpon>formCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formCodigo.resx">
+      <DependentUpon>formCodigo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formConfig.resx">
+      <DependentUpon>formConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formGaleria.resx">
+      <DependentUpon>formGaleria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHistorico.resx">
+      <DependentUpon>formHistorico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMenuImagen.resx">
+      <DependentUpon>formMenuImagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formOnline.resx">
+      <DependentUpon>formOnline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formReporte.resx">
+      <DependentUpon>formReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSector.resx">
+      <DependentUpon>formSector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\formLogin.resx">
+      <DependentUpon>formLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Upload\formUpload.resx">
+      <DependentUpon>formUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Accion\formAccion.resx">
+      <DependentUpon>formAccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Causa\formCausa.resx">
+      <DependentUpon>formCausa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Defecto\formDefecto.resx">
+      <DependentUpon>formDefecto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Modelo\formModelo.resx">
+      <DependentUpon>formModelo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Origen\formOrigen.resx">
+      <DependentUpon>formOrigen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Panel\formPanel.resx">
+      <DependentUpon>formPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="win_Placas\formIngresoPlaca.resx">
+      <DependentUpon>formIngresoPlaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStat.resx">
+      <DependentUpon>formStat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="win_Usuario\formUsuario.resx">
+      <DependentUpon>formUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ControlDeReparacion_1_TemporaryKey.pfx" />
+    <None Include="ControlDeReparacion_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="disconnect.gif" />
+    <None Include="ico_recarga.png" />
+    <None Include="camera.gif" />
+    <Content Include="repair-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="MySql.Data">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
