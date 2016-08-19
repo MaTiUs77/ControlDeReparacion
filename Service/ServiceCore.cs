@@ -65,7 +65,7 @@ namespace ControlDeReparacion
                     dtable.Columns.Add(new DataColumn(xe.Name.ToString(), typeof(string))); // add columns to your dt
                 }
 
-                IEnumerable<XNode> nodeIt = reparacion.Descendants().Where(p => p.Name.LocalName.Contains("item_"));
+                IEnumerable<XNode> nodeIt = reparacion.Descendants("item");//.Where(p => p.Name.LocalName.Contains("item"));
                 foreach (XNode node in nodeIt)
                 {
                     if (node is XElement)

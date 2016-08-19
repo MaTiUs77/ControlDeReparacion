@@ -11,6 +11,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using ControlDeReparacion.Upload;
 using M77;
+using System.Text.RegularExpressions;
+using DirectShowLib;
 
 namespace ControlDeReparacion
 {
@@ -40,14 +42,22 @@ namespace ControlDeReparacion
         IntPtr m_ip = IntPtr.Zero;
         private Image Adjuntar_Foto;
 
-        private void MostrarCamara()
+        private void MostrarCamara(int indexCamId = 0)
         {
-            int VIDEODEVICE = 0; // zero based index of video capture device to use
+            int VIDEODEVICE = indexCamId; // zero based index of video capture device to use
             int VIDEOWIDTH = 640; // Depends on video device caps
             int VIDEOHEIGHT = 480; // Depends on video device caps
             short VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
 
             cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, pictureBox2);
+
+            //foreach( DsDevice camera in cam.capDevices)
+            //{
+            //    comboSelectCamera.Items.Add(camera.Name);
+            //}
+
+            //comboSelectCamera.SelectedIndex = Config.camaraIndex;
+            
             if (!cam.camaras)
             {
                 btnFotoCamara.Visible = false;
@@ -58,6 +68,19 @@ namespace ControlDeReparacion
                 btnFotoCamara.Enabled = false;
             }
         }
+
+        private void ChangeCamera(int index)
+        {
+            CerrarCaptura();
+            MostrarCamara(index);
+        }
+
+        private void comboSelectCamera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = Convert.ToInt32(comboSelectCamera.SelectedIndex);
+            ChangeCamera(index);
+        }
+
         private bool CerrarCaptura()
         {
             cam.Dispose();
@@ -87,8 +110,7 @@ namespace ControlDeReparacion
             // If the image is upsidedown
             b.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-            string root_upload = Config.reparacion_folder + "UploadCamera.jpg";
-            
+            string root_upload = Config.reparacion_folder + "UploadCamera.jpg";            
             b.Save(root_upload,ImageFormat.Jpeg);
 
             CerrarCaptura();
@@ -596,55 +618,63 @@ where m.id_sector = '" + Operador.sector_id + "' and m.modelo = '" + Combo.nombr
             }
             else
             {
-                string modelo = Combo.nombre(comboModelo);
-                string lote = Combo.nombre(comboLote);
-                string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
-
-                string id_defecto = Combo.valor(comboDefecto);
-
-                comboOrigen.SelectedIndex = comboOrigen.FindStringExact("A determinar");
-                comboAccion.SelectedIndex = comboAccion.FindStringExact("A determinar");
-
-                string id_causa = Combo.valor(comboCausa);
-                string id_origen = Combo.valor(comboOrigen);
-                string id_accion = Combo.valor(comboAccion);
-
-                string defecto = guardarReferencias();
-
-                string correctiva = inAccion.Text.ToString();
-
-                string estado = "P";
-                if (scrap)
+                if (caracteresInvalidos())
                 {
-                    estado = "S";
-                }
-
-                if (bonepile)
-                {
-                    estado = "B";
-                }
-
-                if (analisis)
-                {
-                    estado = "A";
-                }
-
-                if (rp.existe)
-                {
-                    rp.Set(modelo,lote,panel,id_causa,id_defecto,defecto,id_accion,correctiva,id_origen,estado);
-                    if (rp.Ingresar())
-                    {
-                        AdjuntarImagen();
-                        cerrarDialogo();
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR: No se pudo actualizar la informacion.");
-                    }
+                    MessageBox.Show("Se detectaron caracteres invalidos en la observacion.");
                 }
                 else
                 {
-                    MessageBox.Show("ERROR: El codigo " + codigo + " no se encuentra ingresado en reparacion.");
+
+                    string modelo = Combo.nombre(comboModelo);
+                    string lote = Combo.nombre(comboLote);
+                    string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
+
+                    string id_defecto = Combo.valor(comboDefecto);
+
+                    comboOrigen.SelectedIndex = comboOrigen.FindStringExact("A determinar");
+                    comboAccion.SelectedIndex = comboAccion.FindStringExact("A determinar");
+
+                    string id_causa = Combo.valor(comboCausa);
+                    string id_origen = Combo.valor(comboOrigen);
+                    string id_accion = Combo.valor(comboAccion);
+
+                    string defecto = guardarReferencias();
+
+                    string correctiva = inAccion.Text.ToString();
+
+                    string estado = "P";
+                    if (scrap)
+                    {
+                        estado = "S";
+                    }
+
+                    if (bonepile)
+                    {
+                        estado = "B";
+                    }
+
+                    if (analisis)
+                    {
+                        estado = "A";
+                    }
+
+                    if (rp.existe)
+                    {
+                        rp.Set(modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
+                        if (rp.Ingresar())
+                        {
+                            AdjuntarImagen();
+                            cerrarDialogo();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: No se pudo actualizar la informacion.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: El codigo " + codigo + " no se encuentra ingresado en reparacion.");
+                    }
                 }
             }
         }
@@ -657,61 +687,70 @@ where m.id_sector = '" + Operador.sector_id + "' and m.modelo = '" + Combo.nombr
             }
             else
             {
-                string modelo = Combo.nombre(comboModelo);
-                string lote = Combo.nombre(comboLote);
-                string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
 
-                string id_defecto = Combo.valor(comboDefecto);
-                string id_causa = Combo.valor(comboCausa);
-
-                string id_origen = Combo.valor(comboOrigen);
-
-                string id_accion;
-
-                if (comboAccion.SelectedIndex < 0)
+                if (caracteresInvalidos())
                 {
-                    id_accion = "0";
+                    MessageBox.Show("Se detectaron caracteres invalidos en la observacion.");
                 }
                 else
                 {
-                    id_accion = Combo.valor(comboAccion);
-                }
 
-                string defecto = guardarReferencias();
+                    string modelo = Combo.nombre(comboModelo);
+                    string lote = Combo.nombre(comboLote);
+                    string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
 
-                string correctiva = inAccion.Text.ToString();
+                    string id_defecto = Combo.valor(comboDefecto);
+                    string id_causa = Combo.valor(comboCausa);
 
-                string estado = "R";
-                if (scrap)
-                {
-                    estado = "S";
-                }
-                if (bonepile)
-                {
-                    estado = "B";
-                } 
-                if (analisis)
-                {
-                    estado = "A";
-                }
+                    string id_origen = Combo.valor(comboOrigen);
 
-                rp.Nuevo(codigo);
-                if (rp.existe)
-                {
-                    rp.Set(modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
-                    if (rp.Reparar())
+                    string id_accion;
+
+                    if (comboAccion.SelectedIndex < 0)
                     {
-                        AdjuntarImagen();
-                        cerrarDialogo();
+                        id_accion = "0";
                     }
                     else
                     {
-                        MessageBox.Show("ERROR: No se pudo actualizar la informacion.");
+                        id_accion = Combo.valor(comboAccion);
                     }
-                }
-                else
-                {
-                MessageBox.Show("ERROR: El codigo " + codigo + " no se encuentra ingresado en reparacion.");
+
+                    string defecto = guardarReferencias();
+
+                    string correctiva = inAccion.Text.ToString();
+
+                    string estado = "R";
+                    if (scrap)
+                    {
+                        estado = "S";
+                    }
+                    if (bonepile)
+                    {
+                        estado = "B";
+                    }
+                    if (analisis)
+                    {
+                        estado = "A";
+                    }
+
+                    rp.Nuevo(codigo);
+                    if (rp.existe)
+                    {
+                        rp.Set(modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
+                        if (rp.Reparar())
+                        {
+                            AdjuntarImagen();
+                            cerrarDialogo();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: No se pudo actualizar la informacion.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: El codigo " + codigo + " no se encuentra ingresado en reparacion.");
+                    }
                 }
             }
         }
@@ -727,14 +766,41 @@ where m.id_sector = '" + Operador.sector_id + "' and m.modelo = '" + Combo.nombr
                     // comboOrigen.SelectedIndex < 0 ||
                     inAccion.Text.ToString().Equals(string.Empty)
                )
-            {
+            {                
                 return true;
             }
             else
-            {
+            {                
                 return false;
             }
         }
+
+        private bool caracteresInvalidos()
+        {
+            string texto = inAccion.Text.ToString();
+            string pattern = Config.observacionRegex;
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(texto);
+            int textoCount = texto.Length;
+            int matchCount = match.Length;
+
+            if (match.Success) // Los caracteres son permitidos
+            {
+                if(textoCount==matchCount)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true; // es invalido
+            }
+        }
+
         private void ingresarDB()
         {
             if (camposIncompletos())
@@ -743,69 +809,56 @@ where m.id_sector = '" + Operador.sector_id + "' and m.modelo = '" + Combo.nombr
             }
             else
             {
-
-                comboOrigen.SelectedIndex = comboOrigen.FindStringExact("A determinar");
-                comboAccion.SelectedIndex = comboAccion.FindStringExact("A determinar");
-
-                string modelo = Combo.nombre(comboModelo);
-                string lote = Combo.nombre(comboLote);
-                string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
-                string id_defecto = Combo.valor(comboDefecto);
-                string id_causa = Combo.valor(comboCausa);
-
-                string id_origen = Combo.valor(comboOrigen);
-                string id_accion = Combo.valor(comboAccion);
-                string defecto = guardarReferencias();
-                string correctiva = inAccion.Text.ToString();
-                string estado = "P";
-
-
-                if (scrap)
+                if(caracteresInvalidos())
                 {
-                    estado = "S";
-                }
-
-                if (bonepile)
+                    MessageBox.Show("Se detectaron caracteres invalidos en la observacion.");
+                } else
                 {
-                    estado = "B";
-                }
+                    comboOrigen.SelectedIndex = comboOrigen.FindStringExact("A determinar");
+                    comboAccion.SelectedIndex = comboAccion.FindStringExact("A determinar");
 
-                if (analisis)
-                {
-                    estado = "A";
-                }
+                    string modelo = Combo.nombre(comboModelo);
+                    string lote = Combo.nombre(comboLote);
+                    string panel = comboPanel.Items[comboPanel.SelectedIndex].ToString();
+                    string id_defecto = Combo.valor(comboDefecto);
+                    string id_causa = Combo.valor(comboCausa);
 
-                if (!rp.existe)
-                {
-                    rp.Set(modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
-                    if (rp.Ingresar())
+                    string id_origen = Combo.valor(comboOrigen);
+                    string id_accion = Combo.valor(comboAccion);
+                    string defecto = guardarReferencias();
+                    string correctiva = inAccion.Text.ToString();
+
+                    string estado = "P";
+
+                    if (scrap)
                     {
-                        AdjuntarImagen();
-                        cerrarDialogo();
+                        estado = "S";
                     }
-                    else
+
+                    if (bonepile)
                     {
-                        MessageBox.Show("ERROR. No se pudo ingresar la informacion al sistema.");
+                        estado = "B";
                     }
-                }
-                /*
-                if (!Reparacion.Existe(codigo))
-                {
-                    bool rs = Reparacion.Ingresar(codigo, modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
-                    if (rs)
+
+                    if (analisis)
                     {
-                        AdjuntarImagen();
-                        this.Close();
+                        estado = "A";
                     }
-                    else
+
+                    if (!rp.existe)
                     {
-                        MessageBox.Show("ERROR. No se pudo ingresar la informacion al sistema.");
+                        rp.Set(modelo, lote, panel, id_causa, id_defecto, defecto, id_accion, correctiva, id_origen, estado);
+                        if (rp.Ingresar())
+                        {
+                            AdjuntarImagen();
+                            cerrarDialogo();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR. No se pudo ingresar la informacion al sistema.");
+                        }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("ATENCION: Se detecto que el codigo '" + codigo + "' ya fue ingresado al sistema.");
-                }*/
             }
         }
 
@@ -997,5 +1050,7 @@ where m.id_sector = '" + Operador.sector_id + "' and m.modelo = '" + Combo.nombr
             actualizarPlanilla = true;
             this.Close();
         }
+
+       
     }
 }

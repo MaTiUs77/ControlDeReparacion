@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.inCodigo = new System.Windows.Forms.Label();
             this.comboPanel = new System.Windows.Forms.ComboBox();
             this.comboLote = new System.Windows.Forms.ComboBox();
@@ -69,6 +69,7 @@
             this.btnFotoCamara = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.comboSelectCamera = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.boxDeclaracion.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -329,13 +330,13 @@
             // adel
             // 
             this.adel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.adel.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.adel.DefaultCellStyle = dataGridViewCellStyle5;
             this.adel.HeaderText = "";
             this.adel.Name = "adel";
             this.adel.ReadOnly = true;
@@ -503,6 +504,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.comboSelectCamera);
             this.groupBox4.Controls.Add(this.btnCapturar);
             this.groupBox4.Controls.Add(this.btnFotoPc);
             this.groupBox4.Controls.Add(this.btnFotoCamara);
@@ -555,9 +557,9 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 27);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 25);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox2.Size = new System.Drawing.Size(640, 482);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
@@ -566,6 +568,18 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // comboSelectCamera
+            // 
+            this.comboSelectCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSelectCamera.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboSelectCamera.FormattingEnabled = true;
+            this.comboSelectCamera.Location = new System.Drawing.Point(363, 513);
+            this.comboSelectCamera.Name = "comboSelectCamera";
+            this.comboSelectCamera.Size = new System.Drawing.Size(162, 28);
+            this.comboSelectCamera.TabIndex = 12;
+            this.comboSelectCamera.Visible = false;
+            this.comboSelectCamera.SelectedIndexChanged += new System.EventHandler(this.comboSelectCamera_SelectedIndexChanged);
             // 
             // formIngresoPlaca
             // 
@@ -645,5 +659,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox boxDeclaracion;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboSelectCamera;
     }
 }

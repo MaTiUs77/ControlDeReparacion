@@ -498,7 +498,9 @@ namespace ControlDeReparacion
 
                         if (mImg.camara)
                         {
-                            MessageBox.Show("Opcion temporalmente deshabilitada.");
+                            formCapture fcapture = new formCapture();
+                            fcapture.codigo = fc.codigo;
+                            fcapture.ShowDialog();
                         }
                         else
                         {

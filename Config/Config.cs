@@ -14,8 +14,10 @@ namespace ControlDeReparacion
 {
     class Config
     {
+        public static string observacionRegex = @"[ñÑA-Za-z,-_:/0-9\s.]*";
         public static int reparacion_limite = 2;
         public static int version_ini = 4;
+        public static int camaraIndex = 0;
 
         public static string current_modelo = "";
         public static string current_lote = "";

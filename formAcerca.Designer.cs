@@ -75,8 +75,9 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(495, 89);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Se mejoraron algunas consultas de base de datos, a su vez se agregaron opciones d" +
-                "e administracion del sistema. ";
+            this.textBox1.Text = "Es posible agregar multiples imagenes a una reparacion. Al usar la tecla F2 solic" +
+    "itara el codigo de la placa, luego puede elegir una imagen desde captura de cama" +
+    "ra o desde una ubicacion en la PC";
             // 
             // label4
             // 
